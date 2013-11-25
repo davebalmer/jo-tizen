@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<!-- 
+		Jo HTML5 app framework is open source and available at:
+		http://github.com/davebalmer/jo
+		
+		Documentation and licensing (FreeBSD) are available at:
+		http://joapp.com
+		
+		This sample project has version 0.5.0 of Jo included.
+		Always check the project website for the latest version.
+	-->
+
+	<title>Jo Sample Project</title>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="Jo sample project for Tizen Web IDE"/>
+	<meta name="format-detection" content="false">
+
+
+	<!-- Jo "Flattery" Theme (more available) -->
+	<link rel="stylesheet" href="css/flattery/jo-flattery.css" type="text/css">
+	
+	<!-- Your additional app CSS goes here: -->
+	<!-- <like rel="stylesheet" href="css/mycss.css" type="text/css"> -->
+
+	<!--
+		Note: Tizen Web apps work best if ALL initial script tags
+		are in the <head> of your HTML document.
+	 -->
+
+	<!-- Jo library (jo_min.js is a minified version of jo.js) -->
+	<script src="js/jo/jo_min.js"></script>
+
+	<!-- Your application library -->
+	<script src="js/app/app.js"></script>
+	<script src="js/app/menu.js"></script>
+	<script src="js/app/popups.js"></script>
+	<script src="js/app/table.js"></script>
+	<script src="js/app/html.js"></script>
+	<script src="js/app/widgets.js"></script>
+	<script src="js/app/themes.js"></script>
+
+	<!-- App startup -->
+	<script>
+	window.onload = function() {
+		jo.load();
+
+		// listen to hardware "back" button
+		window.addEventListener('tizenhwkey', function(e) {
+			if (e.keyName == "back")
+				joGesture.backEvent.fire("back");
+		});
+
+		// if no subsequent captures on back event,
+		// this will perform the default Tizen application exit
+		joGesture.backEvent.capture(function() {
+			console.log("exit");
+			tizen.application.getCurrentApplication().exit();
+		});
+
+		// Your app initialization goes here
+		App.load();
+	};
+	</script>
+</head>
+<body>
+
+<!--
+	This demo app is pure JS. Check out js/app.js to investigate.
+-->
+
+</body>
+</html>
